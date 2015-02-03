@@ -11,10 +11,5 @@ def home():
 def map():
     return render_template('index.html')
 
-@app.route('/echo/', methods=['GET'])
-def echo():
-    ret_data = {"value": request.args.get('echoValue')}
-    return jsonify(ret_data)
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
