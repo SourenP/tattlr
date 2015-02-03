@@ -1,2 +1,2 @@
 # yolo-octo-ninja
-Here the voice of Columbia like a bird.
+Hear the voice of Columbia like a bird.
