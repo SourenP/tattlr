@@ -5,7 +5,7 @@ app.config["DEBUG"] = True  # Only include this while you are testing your app
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return "Fuck you souren"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
