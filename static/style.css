@@ -24,19 +24,3 @@ html, body, #map-canvas {
 	border-color: #4d90fe !important;
 	outline: none;
 }
-
-::-webkit-input-placeholder {
-   color: red;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: red;  
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: red;  
-}
-
-:-ms-input-placeholder {  
-   color: red;  
-}
