@@ -68,14 +68,18 @@ function inputBox(controlDiv, map) {
   var inputBox = document.createElement('input');
   inputBox.className = "inputBox";
   inputBox.type = "text"
+
   inputBox.onkeypress = 
     function(evt) {
       evt = (evt) ? evt : window.event
       var charCode = (evt.which) ? evt.which : evt.keyCode
       if (charCode == 13) {
         comment = inputBox.value;
-        createPost(map, 40.807528, -73.962525, comment);
-        inputBox.disabled = true;
+        console.log(typeof(comment));
+        $.post("/map", {message: JSON.stringify(comment)}, function() {
+          createPost(map, 40.807528, -73.962525, comment);
+          inputBox.disabled = true;
+        });
         return false;
       }
       return true;

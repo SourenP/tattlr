@@ -15,7 +15,7 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    time = db.Column(db.String(20), unique=True)
+    time = db.Column(db.String(60), unique=True)
     message = db.Column(db.String(200), unique=True)
 
     def __init__(self, time, message):
