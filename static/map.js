@@ -66,6 +66,7 @@ function initialize() {
         //$.post("/map", {message: JSON.stringify(comment)}, function() {
           createPost(map, myLat, myLng, comment);
           map.panTo(myLatLng)
+          map.setZoom(17)
           inputBox.disabled = true;
         //});
       } else {
