@@ -82,7 +82,7 @@ function initialize() {
 function createPost(map, lat, lng, comment) {
   var latLng = new google.maps.LatLng(lat, lng);
   var marker = new google.maps.Marker({ position: latLng, map: map});
-  //marker.setVisible(false)
+  marker.setVisible(false)
 
   var label = new Label({ map: map }, comment);
   label.bindTo('position', marker, 'position');
