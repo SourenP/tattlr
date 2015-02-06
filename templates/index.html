@@ -5,11 +5,11 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5q0U9dlCJJwWOeZtIG1xuT3MJekY52sA">
-    </script>
+    <script src="https://cdn.firebase.com/js/client/2.1.2/firebase.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5q0U9dlCJJwWOeZtIG1xuT3MJekY52sA"> </script>
     <script type="text/javascript" src="{{ url_for('static', filename='label.js') }}"> </script>
     <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"> </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='firebase.js') }}"> </script>
   </head>
   <body>
     <div id="map-canvas"> </div>

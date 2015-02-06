@@ -1,3 +1,4 @@
+var myFirebaseRef = new Firebase("https://blistering-torch-7470.firebaseIO.com/");
 var myLat;
 var myLng;
 var myLatLng;
@@ -30,14 +31,13 @@ var styles = [
 ];
 
 function initialize() {
-
   geoFindMe(setMyCoord);
 
   var mapOptions = {
     zoom: 17,
     minZoom: 17,
     maxZoom: 19,
-    center: { lat: 40.807528, lng: -73.962525},
+    center: { lat: 40.808259, lng: -73.961833},
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
     styles: styles
@@ -45,6 +45,9 @@ function initialize() {
   
   var mapDiv = document.getElementById('map-canvas');
   var map = new google.maps.Map(mapDiv, mapOptions);
+
+  // Display all current posts
+  createAllPosts(map);
 
   // Create the input box
   var centerControlDiv = document.createElement('div');
@@ -55,6 +58,7 @@ function initialize() {
   var inputBox = document.createElement('input');
   inputBox.className = "inputBox";
   inputBox.type = "text"
+  centerControlDiv.appendChild(inputBox);
 
   // Functionality of input box
   inputBox.onkeypress = function(evt) {
@@ -62,12 +66,15 @@ function initialize() {
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode == 13) {
       if (gotCoord) {
-        comment = inputBox.value;
+        curr_user = "Souren"
+        curr_comment = inputBox.value;
+        var d = new Date();
+        curr_time = d.getTime();
+        myFirebaseRef.push({user: curr_user, comment: curr_comment, lat: myLat, lng: myLng, time: curr_time});
         //$.post("/map", {message: JSON.stringify(comment)}, function() {
-          createPost(map, myLat, myLng, comment);
-          map.panTo(myLatLng)
-          map.setZoom(17)
-          inputBox.disabled = true;
+        map.panTo(myLatLng);
+        map.setZoom(17);
+        inputBox.disabled = true;
         //});
       } else {
         alert("Don't have your location")
@@ -77,7 +84,11 @@ function initialize() {
     return true;
   };
 
-  centerControlDiv.appendChild(inputBox);
+  // When a new post gets added
+  myFirebaseRef.on('child_added', function(snapshot) {
+    post = snapshot.val();
+    createPost(map, post.lat, post.lng, post.comment);
+  });
 }
 
 function createPost(map, lat, lng, comment) {
@@ -114,6 +125,13 @@ function setMyCoord(lat, lng) {
   myLng = lng;
   myLatLng = new google.maps.LatLng(lat, lng);
   console.log("Got Coordinates" + myLat + myLng)
+}
+
+function createAllPosts(map) {
+  myFirebaseRef.orderByChild("time").on("child_added", function(snapshot) {
+    post = snapshot.val();
+    createPost(map, post.lat, post.lng, post.comment);
+  });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

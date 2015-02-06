@@ -23,3 +23,18 @@ html, body, #map-canvas {
 	border-color: #4d90fe !important;
 	outline: none;
 }
+
+.post {
+	height: auto;
+	width: auto;
+	position: absolute;
+	display: none;
+	background-color: white;
+	padding: 4px;
+}
+
+.post_text {
+	color: red;
+	font-size: 15px;
+	font-family: Roboto,Arial,sans-serif;
+}

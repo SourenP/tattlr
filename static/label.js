@@ -5,16 +5,15 @@ function Label(opt_options, comment) {
 
 	// Label specific
 	var span = this.span_ = document.createElement('span');
-	span.style.cssText = 'position: relative; left: -50%; top: -8px; ' +
-	                  'white-space: nowrap; border: 1px solid blue; ' +
-	                  'padding: 2px; background-color: white';
+	span.className = 'post_text'
+	//span.style.cssText = 'position: relative; left: -50%; top: -8px; ' +
+	//                  'white-space: nowrap; border: 1px solid blue; ' +
+	//                  'padding: 2px; ;
 	span.innerHTML = comment
 
 	var div = this.div_ = document.createElement('div');
-	div.style.height = "200px";
-	div.style.width = "100px"
+	div.className = 'post'
 	div.appendChild(span);
-	div.style.cssText = 'position: absolute; display: none';
 };
 Label.prototype = new google.maps.OverlayView;
 
