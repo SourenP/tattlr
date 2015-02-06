@@ -1,13 +1,8 @@
 from flask import Flask, jsonify, render_template, request
-from flask.ext.sqlalchemy import SQLAlchemy
 import os, datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
-app.config["DEBUG"] = True  # Only include this while you are testing your app
-
-from models import *
+app.config["DEBUG"] = True  # Only include this while you are testing your app`
 
 @app.route("/")
 def home():
@@ -15,11 +10,6 @@ def home():
 
 @app.route("/map", methods=['GET','POST'])
 def map():
-	if request.method == 'POST':
-		message = request.form['message']
-		post = Post(str(datetime.datetime.utcnow()), message)
-		db.session.add(post)
-		db.session.commit()
 	return render_template('index.html')
 
 
