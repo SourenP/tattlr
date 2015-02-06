@@ -2,7 +2,7 @@ var myFirebaseRef = new Firebase("https://blistering-torch-7470.firebaseIO.com/"
 var myLat;
 var myLng;
 var myLatLng;
-var gotCoord = false;
+var postDic = {};
 var styles = [
   {
     featureType: "road",
@@ -48,6 +48,7 @@ function initialize() {
 
   // Display all current posts
   createAllPosts(map);
+  console.log(Object.keys(postDic).length);
 
   // Create the input box
   var centerControlDiv = document.createElement('div');
@@ -57,7 +58,7 @@ function initialize() {
 
   var inputBox = document.createElement('input');
   inputBox.className = "inputBox";
-  inputBox.type = "text"
+  inputBox.type = "text";
   centerControlDiv.appendChild(inputBox);
 
   // Functionality of input box
@@ -70,14 +71,13 @@ function initialize() {
         curr_comment = inputBox.value;
         var d = new Date();
         curr_time = d.getTime();
+        curr_state = 1;
         myFirebaseRef.push({user: curr_user, comment: curr_comment, lat: myLat, lng: myLng, time: curr_time});
-        //$.post("/map", {message: JSON.stringify(comment)}, function() {
         map.panTo(myLatLng);
         map.setZoom(17);
         inputBox.disabled = true;
-        //});
-      } else {
-        alert("Don't have your location")
+        } else {
+          alert("Don't have your location")
       }
       return false;
     }
@@ -87,18 +87,39 @@ function initialize() {
   // When a new post gets added
   myFirebaseRef.on('child_added', function(snapshot) {
     post = snapshot.val();
-    createPost(map, post.lat, post.lng, post.comment);
+    createPost(map, post.lat, post.lng, post.comment, snapshot.key());
   });
+
+  myFirebaseRef.on('child_removed', function(snapshot) {
+    postDic[snapshot.key()].setMap(null);
+    postDic[snapshot.key()] = null;
+    delete postDic[snapshot.key()];
+    console.log(postDic[snapshot.key()])
+  });
+
+  var i = 0;
+  for (var property in postDic) {
+    console.log(i);
+    i++;
+    console.log(property);
+  }
+
+  //console.log(Object.keys(postDic).length);
+  //console.log("le")
+  //console.log(postDic["-JhSJUh8iVOsDJHU6yOH"])
+  //postDic['-JhSJUh8iVOsDJHU6yOH'].setMap(null);
+  //delete postDic['-JhSJUh8iVOsDJHU6yOH']
+  //console.log(postDic['-JhSJUh8iVOsDJHU6yOH'])
 }
 
-function createPost(map, lat, lng, comment) {
+function createPost(map, lat, lng, comment, key) {
   var latLng = new google.maps.LatLng(lat, lng);
   var marker = new google.maps.Marker({ position: latLng, map: map});
-  marker.setVisible(false)
-
-  var label = new Label({ map: map }, comment);
-  label.bindTo('position', marker, 'position');
-  label.bindTo('text', marker, 'position');
+  marker.setVisible(false);
+  postDic[key] = new Label({ map: map }, comment);
+  console.log(Object.keys(postDic).length);
+  postDic[key].bindTo('position', marker, 'position');
+  postDic[key].bindTo('text', marker, 'position');
 }
 
 // Geolocation
@@ -130,7 +151,7 @@ function setMyCoord(lat, lng) {
 function createAllPosts(map) {
   myFirebaseRef.orderByChild("time").on("child_added", function(snapshot) {
     post = snapshot.val();
-    createPost(map, post.lat, post.lng, post.comment);
+    createPost(map, post.lat, post.lng, post.comment, snapshot.key());
   });
 }
 

@@ -38,6 +38,8 @@ Label.prototype.onRemove = function() {
 	for (var i = 0, I = this.listeners_.length; i < I; ++i) {
 		google.maps.event.removeListener(this.listeners_[i]);
 	}
+
+	this = null;
 };
 
 // Implement draw
