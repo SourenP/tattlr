@@ -32,24 +32,25 @@ html, body, #map-canvas {
 	padding: 4px;
 	width: auto;
 	height: auto;
-	border-left: 2px solid #4d90fe;
-	border-right: 2px solid #4d90fe;
-	border-top: 2px solid #4d90fe;
-	border-bottom: 2px solid #5680FC;
+	border-left: 6px solid #5680FC;
+	border-right: 1px solid #4d90fe;
+	border-top: 1px solid #4d90fe;
+	border-bottom: 1px solid #5680FC;
+	opacity: 0.8;
 }
 
 .post_text {
 	color: #0336D1;
-	font-size: 15px;
+	font-size: 13px;
 	font-family: Roboto,Arial,sans-serif;
 }
 
 .post_pointer {
 	width: 0; 
 	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-top: 5px solid #5680FC;
+	border-left: 3px solid transparent;
+	border-right: 3px solid transparent;
+	border-top: 4px solid #5680FC;
 	opacity: 0.8;
 }
 

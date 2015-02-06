@@ -81,9 +81,8 @@ function initialize() {
         alert("Don't have your location")
       }
       return false;
-    }
-    else {
-      if ((inputBox.value).length>30) {
+    } else {
+      if (inputBox.value.length > 30) {
         evt.preventDefault();
       }
     }
