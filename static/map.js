@@ -3,6 +3,7 @@ var myLat;
 var myLng;
 var myLatLng;
 var postDic = {};
+var map_g;
 var styles = [
   {
     featureType: "road",
@@ -45,10 +46,10 @@ function initialize() {
   
   var mapDiv = document.getElementById('map-canvas');
   var map = new google.maps.Map(mapDiv, mapOptions);
+  map_g = map;
 
   // Display all current posts
   createAllPosts(map);
-  console.log(Object.keys(postDic).length);
 
   // Create the input box
   var centerControlDiv = document.createElement('div');
@@ -83,41 +84,13 @@ function initialize() {
     }
     return true;
   };
-
-  // When a new post gets added
-  myFirebaseRef.on('child_added', function(snapshot) {
-    post = snapshot.val();
-    createPost(map, post.lat, post.lng, post.comment, snapshot.key());
-  });
-
-  myFirebaseRef.on('child_removed', function(snapshot) {
-    postDic[snapshot.key()].setMap(null);
-    postDic[snapshot.key()] = null;
-    delete postDic[snapshot.key()];
-    console.log(postDic[snapshot.key()])
-  });
-
-  var i = 0;
-  for (var property in postDic) {
-    console.log(i);
-    i++;
-    console.log(property);
-  }
-
-  //console.log(Object.keys(postDic).length);
-  //console.log("le")
-  //console.log(postDic["-JhSJUh8iVOsDJHU6yOH"])
-  //postDic['-JhSJUh8iVOsDJHU6yOH'].setMap(null);
-  //delete postDic['-JhSJUh8iVOsDJHU6yOH']
-  //console.log(postDic['-JhSJUh8iVOsDJHU6yOH'])
 }
 
 function createPost(map, lat, lng, comment, key) {
   var latLng = new google.maps.LatLng(lat, lng);
   var marker = new google.maps.Marker({ position: latLng, map: map});
   marker.setVisible(false);
-  postDic[key] = new Label({ map: map }, comment);
-  console.log(Object.keys(postDic).length);
+  postDic[key] = new Label({ map: map }, comment, key);
   postDic[key].bindTo('position', marker, 'position');
   postDic[key].bindTo('text', marker, 'position');
 }
@@ -154,5 +127,15 @@ function createAllPosts(map) {
     createPost(map, post.lat, post.lng, post.comment, snapshot.key());
   });
 }
+
+// When a new post gets added
+myFirebaseRef.on('child_added', function(snapshot) {
+  post = snapshot.val();
+  createPost(map_g, post.lat, post.lng, post.comment, snapshot.key());
+});
+
+myFirebaseRef.on('child_removed', function(snapshot) {
+  postDic[snapshot.key()].setMap(null);
+});
 
 google.maps.event.addDomListener(window, 'load', initialize);
