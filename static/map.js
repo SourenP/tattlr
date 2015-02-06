@@ -58,6 +58,7 @@ function initialize() {
   var inputBox = document.createElement('input');
   inputBox.className = "inputBox";
   inputBox.type = "text"
+  $(".inputBox").attr('maxlength','10');
   centerControlDiv.appendChild(inputBox);
 
   // Functionality of input box
@@ -80,6 +81,11 @@ function initialize() {
         alert("Don't have your location")
       }
       return false;
+    }
+    else {
+      if ((inputBox.value).length>30) {
+        evt.preventDefault();
+      }
     }
     return true;
   };

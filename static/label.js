@@ -3,17 +3,27 @@ function Label(opt_options, comment) {
 	// Initialization
 	this.setValues(opt_options);
 
+	// Triangle
+	var tri = this.div_ = document.createElement('div')
+	tri.className = 'post_pointer'
+
 	// Label specific
 	var span = this.span_ = document.createElement('span');
 	span.className = 'post_text'
-	//span.style.cssText = 'position: relative; left: -50%; top: -8px; ' +
-	//                  'white-space: nowrap; border: 1px solid blue; ' +
-	//                  'padding: 2px; ;
 	span.innerHTML = comment
+
+	// Text Container
+	var text_container = this.div_ = document.createElement('div')
+	text_container.className = 'text_container'
 
 	var div = this.div_ = document.createElement('div');
 	div.className = 'post'
-	div.appendChild(span);
+
+
+	text_container.appendChild(span);
+	div.appendChild(text_container)
+	div.appendChild(tri);
+
 };
 Label.prototype = new google.maps.OverlayView;
 
