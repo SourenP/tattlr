@@ -37,12 +37,18 @@ html, body, #map-canvas {
 	border-top: 1px solid #4d90fe;
 	border-bottom: 1px solid #5680FC;
 	opacity: 0.8;
+	-moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
 
 .post_text {
 	color: #0336D1;
 	font-size: 13px;
 	font-family: Roboto,Arial,sans-serif;
+	-moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
 
 .post_pointer {
