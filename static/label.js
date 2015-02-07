@@ -49,10 +49,10 @@ function Label(opt_options, comment, key) {
 Label.prototype.onAdd = function() {
 	var pane = this.pane_ = this.getPanes().overlayMouseTarget;
 	pane.appendChild(this.div_);
-	pane.id = "the_pane"
-
 	var me = this;
-	$("#post_" + me.key_).hide();
+	$("#post_" + me.key_).hide(0);
+	$("#post_" + me.key_).show('fast');
+	$("#post_" + me.key_).delay(3000).hide('fast');
 
 	// Ensures the label is redrawn if the text or position is changed.
 	google.maps.event.addDomListener(me.div_, 'mouseover', function() {
