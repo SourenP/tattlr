@@ -96,3 +96,15 @@ html, body, #map-canvas {
 .logo:hover, .logo:focus {
 	background-color: #9DCEFF;
 }
+
+.about {
+	color: #333;
+	font-size: 16px;
+	font-family: Roboto,Arial,sans-serif;
+}
+
+.about h1 {
+	color: #333;
+	font-size: 20px;
+	font-family: Roboto,Arial,sans-serif;
+}
