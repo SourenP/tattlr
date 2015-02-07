@@ -121,7 +121,7 @@ function initialize() {
         myFirebaseRef.push({user: curr_user, comment: curr_comment, lat: myLat, lng: myLng, time: curr_time});
         map.panTo(myLatLng);
         map.setZoom(17);
-        //inputBox.disabled = true;
+        inputBox.value = "";
       } else alert("Don't have your location");
     } else if (inputBox.value.length>70) evt.preventDefault();
   };
