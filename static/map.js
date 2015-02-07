@@ -6,12 +6,25 @@ var postDic = {};
 var map_g;
 var styles = [
   {
+    stylers: [
+      { "lightness": 15 },
+      { "hue": "#0077ff" },
+      { visibility: "simplified" }
+    ]
+  },{
     featureType: "road",
     elementType: "geometry",
     stylers: [
+      { hue: "#0077ff" },
       { lightness: 100 },
-      { visibility: "on" }
+      { visibility: "simplified" }
     ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      { "gamma": 5.01 }
+    ], 
   },{
     elementType: "labels.text",
     stylers: [
@@ -38,7 +51,9 @@ function initialize() {
     center: { lat: 40.808259, lng: -73.961833},
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     disableDefaultUI: true,
-    styles: styles
+    styles: styles,
+    draggableCursor: 'default', 
+    //draggingCursor: 'default', 
   };
   
   var mapDiv = document.getElementById('map-canvas');
@@ -75,15 +90,30 @@ function initialize() {
       } else alert("Don't have your location");
     } else if (inputBox.value.length>30) evt.preventDefault();
   };
+
+  var logo_div = document.createElement('div');
+  logo_div.index = 2;
+  logo_div.className = "logo";
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(logo_div);;
+
+
 }
 
 // Post creation
 
 function createPost(map, lat, lng, comment, key) {
   var latLng = new google.maps.LatLng(lat, lng);
-  var marker = new google.maps.Marker({ position: latLng, map: map});
+  var marker = new google.maps.Marker({ 
+    position: latLng, 
+    map: map,
+    clickable: true,
+    
+  });
   marker.setVisible(false);
-  postDic[key] = new Label({ map: map }, comment, key);
+  postDic[key] = new Label({ 
+    map: map, 
+    cursor: 'pointer'
+  }, comment, key);
   postDic[key].bindTo('position', marker, 'position');
   postDic[key].bindTo('text', marker, 'position');
 }
