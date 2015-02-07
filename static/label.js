@@ -6,7 +6,7 @@ function Label(opt_options, comment, key) {
 	this.key_ = key;
 
 	// Triangle
-	var tri = this.div_ = document.createElement('div')
+	var tri = document.createElement('div')
 	tri.className = 'post_pointer';
 
 	// Text span
@@ -15,7 +15,7 @@ function Label(opt_options, comment, key) {
 	span.innerHTML = this.comment_;
 
 	// Text Container
-	var text_container = this.div_ = document.createElement('div')
+	var text_container = document.createElement('div')
 	text_container.className = 'text_container'
 
 	text_container.appendChild(span);
