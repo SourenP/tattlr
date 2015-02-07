@@ -75,7 +75,7 @@ function initialize() {
       } else alert("Don't have your location");
     } else if (inputBox.value.length>30) evt.preventDefault();
   };
-
+}
 
 // Post creation
 
