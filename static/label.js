@@ -5,8 +5,10 @@ function Label(opt_options, comment, key) {
 	this.comment_ = comment;
 	this.key_ = key;
 
+	
+
 	// Triangle
-	var tri = this.div_ = document.createElement('div')
+	var tri = document.createElement('div');
 	tri.className = 'post_pointer';
 
 	// Text span
@@ -15,8 +17,12 @@ function Label(opt_options, comment, key) {
 	span.innerHTML = this.comment_;
 
 	// Text Container
-	var text_container = this.div_ = document.createElement('div')
-	text_container.className = 'text_container'
+	var text_container = document.createElement('div');
+	text_container.className = 'text_container';
+
+	var post_container = this.post_container = document.createElement('div');
+	post_container.className = 'post_container';
+	post_container.id = 'post_' + this.key_;
 
 	text_container.appendChild(span);
 
@@ -25,29 +31,70 @@ function Label(opt_options, comment, key) {
 	div.className = 'post'
 	div.id = this.key_;
 
-	div.appendChild(text_container)
-	div.appendChild(tri);
+	//
+	var marker = this.marker_ = document.createElement('div');
+	marker.className = 'post_marker';
+
+	var mouse_trigger_div = this.mouse_trigger_div = document.createElement('div');
+	mouse_trigger_div.className = 'post_marker';
+
+	post_container.appendChild(text_container)
+	post_container.appendChild(tri);
+
+	mouse_trigger_div.appendChild(marker);
+	
+	div.appendChild(post_container);
+	div.appendChild(mouse_trigger_div);
 
 };
+
+
 Label.prototype = new google.maps.OverlayView;
 
 // Implement onAdd
 Label.prototype.onAdd = function() {
-	var pane = this.pane_ = this.getPanes().overlayLayer;
+	var pane = this.pane_ = this.getPanes().overlayMouseTarget;
 	pane.appendChild(this.div_);
 
 	// Ensures the label is redrawn if the text or position is changed.
 	var me = this;
 	this.listeners_ = [
-	google.maps.event.addListener(this, 'position_changed',
-	   function() { me.draw(); }),
+		//google.maps.event.addListener(this, 'position_changed',
+		//  function() { me.draw(); }), 
+
+		google.maps.event.addDomListener(pane, 'mouseover', function(e) {
+            $(me.post_container).css('opacity', 1);
+	    	if($(me.post_container).is(':visible')) {
+	    		console.log(this.id);
+	    		e.stopPropagation();
+	    		return false;
+	    	} else {
+	    		e.stopPropagation();
+	    		
+	    	}
+	    	
+		}),
+
+		google.maps.event.addDomListener(pane, 'mouseout', function(e) {
+			window.event.cancelBubble = true;
+            if (window.event.stopPropagation)
+                window.event.stopPropagation();
+            	
+	    	//console.log(this.id);
+	    	$(me.post_container).css('opacity', 0);
+	    	
+		})
 	];
+
+	
+
 };
 
 // Implement onRemove
 Label.prototype.onRemove = function() {
-	$('#' + this.key_).hide()
 	this.pane_.removeChild(this.div_);
+	$('#' + this.key_).remove();
+	
 
 	// Label is removed from the map, stop updating its position/text.
 	for (var i = 0, I = this.listeners_.length; i < I; ++i) {

@@ -8,14 +8,13 @@ var ref = new Firebase("https://blistering-torch-7470.firebaseIO.com/");
 
 
 setInterval(function() {
-	console.log("hello");
 	ref.on("value", function(snapshot) {
 		
 		snapshot.forEach(function(snapshot) {
 			var cur = new Date(); 
 			message_time = snapshot.val()['time'];
 			console.log(snapshot.val()['time']);
-			if(cur.getTime() - message_time  > 5000 ) {
+			if(cur.getTime() - message_time  > 20000 ) {
 				console.log(snapshot.key());
 				ref.child(snapshot.key()).remove();
 			}

@@ -57,6 +57,7 @@ function initialize() {
   var centerControlDiv = document.createElement('div');
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
   var inputBox = document.createElement('input');
   inputBox.className = "inputBox";
   inputBox.type = "text"
@@ -76,8 +77,10 @@ function initialize() {
         myFirebaseRef.push({user: curr_user, comment: curr_comment, lat: myLat, lng: myLng, time: curr_time});
         map.panTo(myLatLng);
         map.setZoom(17);
-        inputBox.disabled = true;
-      } else alert("Don't have your location");
+        //inputBox.disabled = true;
+      } else {
+        alert("Don't have your location");
+      }
     } else if (inputBox.value.length>30) evt.preventDefault();
   };
 }
@@ -143,3 +146,7 @@ function setMyCoord(lat, lng) {
 
 // Add maps listener on load
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
