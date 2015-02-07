@@ -6,12 +6,7 @@ app.config["DEBUG"] = True  # Only include this while you are testing your app`
 
 @app.route("/")
 def home():
-    return "Home Page"
-
-@app.route("/map", methods=['GET','POST'])
-def map():
-	return render_template('index.html')
-
+    return render_template('index.html')
 
 @app.route('/signup', methods=['POST'])
 def signup():
