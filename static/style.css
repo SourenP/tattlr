@@ -85,6 +85,14 @@ html, body, #map-canvas {
 	border-radius: 100%;
 	background-color: #FFFFFF;
 	opacity: 0.7;
-	margin-left: 28px;
-	margin-top: 22px;
+	margin-left: 24px;
+	margin-top: 24px;
+	-webkit-transition: background-color 300ms linear;
+    	-moz-transition: background-color 300ms linear;
+    	-o-transition: background-color 300ms linear;
+    	transition: background-color 300ms linear;
+}
+
+.logo:hover, .logo:focus {
+	background-color: #9DCEFF;
 }
