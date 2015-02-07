@@ -129,7 +129,12 @@ function initialize() {
   var logo_div = document.createElement('div');
   logo_div.index = 2;
   logo_div.className = "logo";
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(logo_div);;
+  
+  google.maps.event.addDomListener(logo_div, 'click', function() {
+    map_g.setCenter({ lat: 40.808259, lng: -73.961833});
+  });
+  
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(logo_div);
 
 
 }
