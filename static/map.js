@@ -46,7 +46,7 @@ function initialize() {
   map_g = map;
 
   // Display all current posts
-  createAllPosts(map);
+  //createAllPosts(map);
 
   // Create the input box
   var centerControlDiv = document.createElement('div');
