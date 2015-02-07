@@ -23,12 +23,6 @@ var styles = [
       { visibility: "off" }
     ]
   }
-  //,{
-  //  stylers: [
-  //    { hue: "#9BDDFF" },
-  //    { saturation: 0 }
-  //  ]
-  //}
 ];
 
 
@@ -138,7 +132,6 @@ function setMyCoord(lat, lng) {
   myLat = lat;
   myLng = lng;
   myLatLng = new google.maps.LatLng(lat, lng);
-  console.log("Got Coordinates" + myLat + myLng)
 }
 
 // Add maps listener on load
