@@ -27,6 +27,7 @@ var styles = [
 
 
 function initialize() {
+  console.log(Firebase.ServerValue.TIMESTAMP)
   // Find my coordinates
   geoFindMe(setMyCoord);
 
@@ -132,6 +133,7 @@ function setMyCoord(lat, lng) {
   myLat = lat;
   myLng = lng;
   myLatLng = new google.maps.LatLng(lat, lng);
+  //var marker = new google.maps.Marker({ position: myLatLng, map: map_g});
 }
 
 // Add maps listener on load
