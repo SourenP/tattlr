@@ -46,7 +46,7 @@ function initialize() {
   map_g = map;
 
   // Display all current posts
-  createAllPosts(map);
+  //createAllPosts(map);
 
   // Create the input box
   var centerControlDiv = document.createElement('div');
@@ -80,18 +80,21 @@ function initialize() {
 // Post creation
 
 function createPost(map, lat, lng, comment, key) {
+  console.log("create")
   var latLng = new google.maps.LatLng(lat, lng);
   var marker = new google.maps.Marker({ position: latLng, map: map});
   marker.setVisible(false);
-  postDic[key] = new Label({ map: map }, comment, key);
+  postDic[key] = new Label(map, comment, key);
   postDic[key].bindTo('position', marker, 'position');
-  postDic[key].bindTo('text', marker, 'position');
+  //postDic[key].bindTo('text', marker, 'position');
 }
 
 function createAllPosts(map) {
-  myFirebaseRef.orderByChild("time").on("child_added", function(snapshot) {
-    post = snapshot.val();
-    createPost(map, post.lat, post.lng, post.comment, snapshot.key());
+  myFirebaseRef.on("value", function(snapshot) {
+    snapshot.forEach( function(snapshot) { 
+      post = snapshot.val();
+      createPost(map, post.lat, post.lng, post.comment, snapshot.key());
+    });
   });
 }
 

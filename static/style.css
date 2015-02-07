@@ -28,14 +28,18 @@ html, body, #map-canvas {
 	top: 0px;
 	float: top;
 	position: relative;
-	background-color: #5680FC;
-	padding: 6px;
+	background-color: white;
+	padding: 4px;
 	width: auto;
 	height: auto;
+	border-left: 2px solid #4d90fe;
+	border-right: 2px solid #4d90fe;
+	border-top: 2px solid #4d90fe;
+	border-bottom: 2px solid #5680FC;
 }
 
 .post_text {
-	color: #FFFFFF;
+	color: #0336D1;
 	font-size: 15px;
 	font-family: Roboto,Arial,sans-serif;
 }
@@ -43,14 +47,31 @@ html, body, #map-canvas {
 .post_pointer {
 	width: 0; 
 	height: 0; 
-	border-left: 5px solid #5680FC;
+	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
-	border-bottom: 3px solid transparent;
+	border-top: 5px solid #5680FC;
+	opacity: 0.8;
 }
 
 .post {
 	height: auto;
 	width: auto;
 	position: absolute;
-	margin-top: -33px;
+	display: none;
+}
+
+
+.post_marker {
+	/*position: relative;*/
+	width: 5px;
+	height: 5px;
+	border-radius: 90%;
+	background-color: grey;
+
+}
+
+.mouse_trigger_div {
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
 }
