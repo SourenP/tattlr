@@ -46,8 +46,9 @@ Label.prototype.onAdd = function() {
 
 // Implement onRemove
 Label.prototype.onRemove = function() {
-	$('#' + this.key_).hide()
+	//$('#' + this.key_).hide()
 	this.pane_.removeChild(this.div_);
+	$('#' + this.key_).remove();
 
 	// Label is removed from the map, stop updating its position/text.
 	for (var i = 0, I = this.listeners_.length; i < I; ++i) {
@@ -57,6 +58,7 @@ Label.prototype.onRemove = function() {
 
 // Implement draw
 Label.prototype.draw = function() {
+	console.log("draw")
 	var projection = this.getProjection();
 	var position = projection.fromLatLngToDivPixel(this.get('position'));
 
