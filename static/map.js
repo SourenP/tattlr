@@ -139,6 +139,7 @@ function setMyCoord(lat, lng) {
   myLng = lng;
   myLatLng = new google.maps.LatLng(lat, lng);
   console.log("Got Coordinates" + myLat + myLng)
+  var marker = new google.maps.Marker({ position: myLatLng, map: map_g});
 }
 
 // Add maps listener on load
