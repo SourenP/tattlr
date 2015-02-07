@@ -15,7 +15,7 @@ setInterval(function() {
 			var cur = new Date(); 
 			message_time = snapshot.val()['time'];
 			console.log(snapshot.val()['time']);
-			if(cur.getTime() - message_time  > 5000 ) {
+			if(cur.getTime() - message_time  > 20000 ) {
 				console.log(snapshot.key());
 				ref.child(snapshot.key()).remove();
 			}
