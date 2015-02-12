@@ -110,3 +110,10 @@ html, body, #map-canvas {
 	font-size: 20px;
 	font-family: Roboto,Arial,sans-serif;
 }
+
+.demo_text {
+	color: #FC828A;
+	font-size: 18px;
+	font-family: Roboto,Arial,sans-serif;
+	margin-bottom: 16px;
+}

@@ -118,7 +118,6 @@ Label.prototype.onRemove = function() {
 
 // Implement draw
 Label.prototype.draw = function() {
-	console.log("draw")
 	var projection = this.getProjection();
 	var position = projection.fromLatLngToDivPixel(this.get('position'));
 
