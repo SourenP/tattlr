@@ -8,7 +8,6 @@ var ref = new Firebase("https://blistering-torch-7470.firebaseIO.com/");
 
 
 setInterval(function() {
-	console.log("hello");
 	ref.on("value", function(snapshot) {
 		
 		snapshot.forEach(function(snapshot) {
